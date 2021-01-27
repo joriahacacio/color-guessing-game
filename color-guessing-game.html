@@ -1,0 +1,59 @@
+
+<DOCTYPE html>
+  <html lang=“en”>
+      <head>
+          <meta charset=“utf-8" />
+          <title>Color GuessingGame</title>
+      </head>
+    <body>
+      <h1>Color Guessing Game</h1>
+      <!--button to start game-->
+      <button type=“button” onClick='runGame()'>Start Game</button>
+    <script>
+      const COLORS_ARRAY = ['blue', 'cyan', 'gold', 'gray', 'green', 'magenta', 'orange', 'red', 'white', 'yellow'];
+      function runGame(){
+        let numTries=0;
+        let guess = '';
+        let correct = false;
+        const colorArrayLength = COLORS_ARRAY.length;
+        const targetIndex = Math.floor(Math.random() * colorArrayLength);
+        const target = COLORS_ARRAY[targetIndex];
+        console.log(target);
+        //when user clicks "Start Game" button, they will get a prompt to guess the color the computer is thinking of
+        //if user presses the cancel button, they will get a message saing game has been aborted
+      do {
+          guess= prompt('I am thinking of one of these colors:\n\n' + COLORS_ARRAY.join(' , ') +'What color am I thinking of?\n');
+          console.log(guess);
+           if(guess === null){
+             alert('game aborted');
+             return;
+          }
+             
+             correct = checkGuess(guess,target);
+             numTries++;
+           } //if user gets the answer right, they will receive a message saying congratulations and how many tries it took them to get the correct answer 
+        while(!correct);
+          alert('congratulations you win it took you' + numTries + ' tries');
+          document.body.style.background = guess; // if user gets correct answer, the background color will change to the corresponding color 
+      }
+      function checkGuess(guess,target){
+        correct = false;
+      if(!COLORS_ARRAY.includes(guess))
+       {
+           alert('sorry I do not recognize that color try again'); //if user enters an answer not in the array, they will get this message to guess again
+      }
+       else if( guess> target)
+       {
+           alert('your guess is too high'); //if user gets an answer that is too high, they will get this message to guess again
+      }
+      else if( guess< target)
+      {
+          alert ('your guess is too low'); //if user gets an answer that is too low, they will get this message to guess again
+      }
+      else {correct=true;}
+      return correct;
+      
+      }
+    </script>
+    </body>
+  </html>
